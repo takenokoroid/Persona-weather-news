@@ -17,8 +17,54 @@ https://openweathermap.org/api/one-call-api
 
 ## GetAPI
 
-`curl "https://api.openweathermap.org/data/2.5/onecall?lat=35.685973&lon=139.756597&units=metric&lang=ja&appid={YOUR API KEY}"`
+`curl "url "https://api.openweathermap.org/data/2.5/onecall?lat=35.685973&lon=139.756597&exclude=current,minutely,hourly,alerts&units=metric&lang=ja&appid={YOUR API KEY}"`
+日毎の天気を取得する curl
 
 Location を決めないといけないので東京都千代田区 1-1-1 に仮定する。
 
 - 緯度：35.685973,経度：139.756597
+
+完成イメージの 19 日や 21 日のように 2 分割するのが難しいかもしれない。
+
+### exResponse
+
+```{
+      "dt": 1602727200,
+      "sunrise": 1602708431,
+      "sunset": 1602749158,
+      "temp": {
+        "day": 19.18,
+        "min": 16.33,
+        "max": 21.26,
+        "night": 16.62,
+        "eve": 16.33,
+        "morn": 19.55
+      },
+      "feels_like": {
+        "day": 16.05,
+        "night": 12.58,
+        "eve": 12.99,
+        "morn": 17.36
+      },
+      "pressure": 1019,
+      "humidity": 66,
+      "dew_point": 12.87,
+      "wind_speed": 5.66,
+      "wind_deg": 55,
+      "weather": [
+        { "id": 500, "main": "Rain", "description": "小雨", "icon": "10d" }
+      ],
+      "clouds": 100,
+      "pop": 0.49,
+      "rain": 2.17,
+      "uvi": 5.72
+    },
+```
+
+#### 使えそうなの
+
+- weather.main:天気
+- weather.description:一言
+- pop:降水確率
+  降水確率を組み合わせれば分割表示行けるかも？
+  でも晴れの日は雲量を参照。雨の日は降水確率を参照になってスマートじゃない。
