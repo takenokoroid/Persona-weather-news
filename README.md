@@ -13,11 +13,20 @@
 
 ## document
 
+### OneCallAPI
+
 https://openweathermap.org/api/one-call-api
+
+### WeatherConditons
+
+https://openweathermap.org/weather-conditions
 
 ## GetAPI
 
-`curl "url "https://api.openweathermap.org/data/2.5/onecall?lat=35.685973&lon=139.756597&exclude=current,minutely,hourly,alerts&units=metric&lang=ja&appid={YOUR API KEY}"`
+```
+curl "url "https://api.openweathermap.org/data/2.5/onecall?lat=35.685973&lon=139.756597&exclude=current,minutely,hourly,alerts&units=metric&lang=ja&appid={YOUR API KEY}"
+```
+
 日毎の天気を取得する curl
 
 Location を決めないといけないので東京都千代田区 1-1-1 に仮定する。
@@ -26,7 +35,7 @@ Location を決めないといけないので東京都千代田区 1-1-1 に仮�
 
 完成イメージの 19 日や 21 日のように 2 分割するのが難しいかもしれない。
 
-### exResponse
+### exampleResponse
 
 ```{
       "dt": 1602727200,
@@ -66,5 +75,27 @@ Location を決めないといけないので東京都千代田区 1-1-1 に仮�
 - weather.main:天気
 - weather.description:一言
 - pop:降水確率
-  降水確率を組み合わせれば分割表示行けるかも？
-  でも晴れの日は雲量を参照。雨の日は降水確率を参照になってスマートじゃない。
+  ~~降水確率を組み合わせれば分割表示行けるかも？~~
+  ~~でも晴れの日は雲量を参照。雨の日は降水確率を参照になってスマートじゃない。~~
+  ↑WeatherConditons を使えば行けそう
+- weather.icon:天気のアイコン
+  これがドキュメントでいい感じに紹介されている。
+  分割表示も行けそう。
+
+## Fireabse
+
+バックエンドは Firebase にした
+
+現状
+
+- Functions
+- Firestore
+- Hosting
+  を使う予定
+
+### CloudFunctions for firebase
+
+OpenWeatherAPI のデータを取ってくる用。
+データベースに格納したほうが OpenWeatherAPI のリクエスト数は抑えれる。
+代わりに Firebase のほうを食うことになるけど。
+今のところデータベースに格納する予定
