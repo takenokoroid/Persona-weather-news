@@ -1,4 +1,4 @@
-# Persona-wether-news
+# Persona-weather-news
 
 ## 完成イメージ
 
@@ -93,9 +93,20 @@ Location を決めないといけないので東京都千代田区 1-1-1 に仮�
 - Hosting
   を使う予定
 
+### document
+
+https://firebase.google.com/docs/functions/firestore-events?hl=ja
+
 ### CloudFunctions for firebase
 
 OpenWeatherAPI のデータを取ってくる用。  
 データベースに格納したほうが OpenWeatherAPI のリクエスト数は抑えれる。  
 代わりに Firebase のほうを食うことになるけど。  
 今のところデータベースに格納する予定
+
+sampleindex.js は index.js の nonAPIkey コード
+
+#### firestore との連携
+
+ドキュメントの[トリガーイベント外のデータ](https://firebase.google.com/docs/functions/firestore-events?hl=ja#data_outside_the_trigger_event)でできそう  
+コード内の db.doc...は firestore の set なので[それ](https://firebase.google.com/docs/firestore/manage-data/add-data?hl=ja#set_a_document)を参考に。
