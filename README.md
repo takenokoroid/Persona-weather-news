@@ -1,4 +1,4 @@
-# Persona-wether-news
+# Persona-weather-news
 
 ## 完成イメージ
 
